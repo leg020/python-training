@@ -1,6 +1,6 @@
 __autor__ = 'alex'
 
-class group:
+class Group:
 
     def __init__(self, name, header, footer):
         self.name = name
