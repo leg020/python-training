@@ -15,7 +15,9 @@ class NewAddress(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_address(wd)
+        self.create_address(wd, firstname="dsf", middlename="dcsc", lastname="cdsc", nickname="sdcs", photo="C:\\fakepath\\title[1].gif", title="rdewd", company="sdassdasa",
+                            address_home="cdss", home="scac", mobile="sacas", work="asxsax", fax="sxsa", email="sxcsa", email2="sac", email3="sc", homepage="sc", bday="15", bmonth="September",
+                            byear="1994", aday="12", amonth="May", ayear="2020", address2="xxxx", phone2="xsw", notes="wece")
         self.return_home(wd)
         self.logout(wd)
 
@@ -25,11 +27,9 @@ class NewAddress(unittest.TestCase):
     def return_home(self, wd):
         wd.find_element_by_link_text("home").click()
 
-    def create_address(self, wd, firstname="dsf", middlename="dcsc", lastname="cdsc", nickname="sdcs",
-                       photo="C:\\fakepath\\title[1].gif", title="rdewd", company="sdassdasa", address_home="cdss",
-                       home="scac", mobile="sacas", work="asxsax", fax="sxsa", email="sxcsa", email2="sac", email3="sc",
-                       homepage="sc", bday="15", bmonth="September", byear="1994", aday="12", amonth="May", ayear="2020",
-                       address2="xxxx", phone2="xsw", notes="wece"):
+    def create_address(self, wd, firstname, middlename, lastname, nickname, photo, title, company, address_home, home,
+                       mobile, work, fax, email, email2, email3, homepage, bday, bmonth, byear, aday, amonth, ayear,
+                       address2, phone2, notes):
         # open page
         wd.find_element_by_link_text("add new").click()
         # fill address
