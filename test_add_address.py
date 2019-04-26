@@ -21,6 +21,19 @@ class NewAddress(unittest.TestCase):
         self.return_home(wd)
         self.logout(wd)
 
+    def test_new_empty_address(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.create_address(wd, firstname="", middlename="", lastname="", nickname="",
+                            photo="", title="", company="",
+                            address_home="", home="", mobile="", work="", fax="", email="",
+                            email2="", email3="", homepage="", bday="", bmonth="",
+                            byear="", aday="", amonth="", ayear="", address2="", phone2="",
+                            notes="")
+        self.return_home(wd)
+        self.logout(wd)
+
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
