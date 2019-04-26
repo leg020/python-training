@@ -28,8 +28,8 @@ class NewAddress(unittest.TestCase):
         self.create_address(wd, firstname="", middlename="", lastname="", nickname="",
                             photo="", title="", company="",
                             address_home="", home="", mobile="", work="", fax="", email="",
-                            email2="", email3="", homepage="", bday="", bmonth="",
-                            byear="", aday="", amonth="", ayear="", address2="", phone2="",
+                            email2="", email3="", homepage="", bday="", bmonth="-",
+                            byear="", aday="", amonth="-", ayear="", address2="", phone2="",
                             notes="")
         self.return_home(wd)
         self.logout(wd)
@@ -58,9 +58,9 @@ class NewAddress(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(nickname)
-        wd.find_element_by_name("photo").click()
-        wd.find_element_by_name("photo").clear()
-        wd.find_element_by_name("photo").send_keys(photo)
+        #wd.find_element_by_name("photo").click()
+        #wd.find_element_by_name("photo").clear()
+        #wd.find_element_by_name("photo").send_keys(photo)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(title)
