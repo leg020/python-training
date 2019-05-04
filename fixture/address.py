@@ -94,6 +94,16 @@ class AddressHelper:
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
         self.return_home()
 
+    def delete_first_address(self):
+        wd = self.app.wd
+        self.return_home()
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath(
+            "(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]").click()
+        wd.switch_to_alert().accept()
+        self.return_home()
+
+
     def return_home(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
