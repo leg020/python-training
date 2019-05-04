@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
-import pytest
 from model.address import Address
-from fixture.application import Application
-
-
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 def test_new_address(app):
     app.session.login(username="admin", password="secret")
@@ -25,4 +16,5 @@ def test_new_empty_address(app):
                                email2="", email3="", homepage="", bday="", bmonth="-",
                                byear="", aday="", amonth="-", ayear="", address2="", phone2="",
                                notes=""))
+
     app.session.logout()
