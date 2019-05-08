@@ -192,3 +192,8 @@ class AddressHelper:
     def return_home(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.return_home()
+        return len(wd.find_elements_by_name("selected[]"))
