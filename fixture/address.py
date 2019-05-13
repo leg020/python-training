@@ -13,8 +13,7 @@ class AddressHelper:
         # fill address
         self.fill_address_form(address)
         # submit address
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
+        wd.find_element_by_xpath("(//input[@name='submit'])").click()
         self.return_home()
 
     def fill_address_form(self, address):
@@ -75,8 +74,7 @@ class AddressHelper:
         wd = self.app.wd
         self.return_home()
         self.selsect_first_address()
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]").click()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.return_home()
 
@@ -180,13 +178,11 @@ class AddressHelper:
         self.return_home()
         self.selsect_first_address()
         # Open modification form
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::img[2]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # fill address form
         self.fill_address_form(new_address_data)
         # submit modification
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
+        wd.find_element_by_xpath("(//input[@name='update'])").click()
         self.return_home()
 
     def return_home(self):
