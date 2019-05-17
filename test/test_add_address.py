@@ -10,9 +10,12 @@ def test_new_address(app):
     assert len(old_address) + 1 == len(new_address)
 
 def test_new_empty_address(app):
+    old_address = app.address.get_address_list()
     app.address.create(Address(firstname="", middlename="", lastname="", nickname="",
                                photo="", title="", company="",
                                address_home="", home="", mobile="", work="", fax="", email="",
                                email2="", email3="", homepage="", bday="", bmonth="-",
                                byear="", aday="", amonth="-", ayear="", address2="", phone2="",
                                notes=""))
+    new_address = app.address.get_address_list()
+    assert len(old_address) + 1 == len(new_address)

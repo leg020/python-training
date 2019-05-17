@@ -77,7 +77,8 @@ class AddressHelper:
         self.selsect_first_address()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
-        self.return_home()
+        wd.find_element_by_link_text("home").click()
+        #self.return_home()
 
     def selsect_first_address(self):
         wd = self.app.wd
@@ -200,8 +201,10 @@ class AddressHelper:
         wd = self.app.wd
         self.return_home()
         address = []
-        for element in wd.find_elements_by_css_selector("td"):
-            text = element.text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            address.append(Address(lastname=None, id=id))
+        for element_tr in wd.find_elements_by_name("entry"):
+            elements_td = element_tr.find_elements_by_tag_name('td')
+            last_name = elements_td[1].text
+            first_name = elements_td[2].text
+            id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
+            address.append(Address(lastname=last_name, firstname=first_name, id=id))
         return address
