@@ -16,6 +16,7 @@ class AddressHelper:
         # submit address
         wd.find_element_by_xpath("(//input[@name='submit'])").click()
         self.return_home()
+        self.address_cach = None
 
     def fill_address_form(self, address):
         wd = self.app.wd
@@ -79,6 +80,7 @@ class AddressHelper:
         wd.switch_to_alert().accept()
         wd.find_element_by_link_text("home").click()
         #self.return_home()
+        self.address_cach = None
 
     def selsect_first_address(self):
         wd = self.app.wd
@@ -186,6 +188,7 @@ class AddressHelper:
         # submit modification
         wd.find_element_by_xpath("(//input[@name='update'])").click()
         self.return_home()
+        self.address_cach
 
     def return_home(self):
         wd = self.app.wd
@@ -197,14 +200,17 @@ class AddressHelper:
         self.return_home()
         return len(wd.find_elements_by_name("selected[]"))
 
+    address_cach = None
+
     def get_address_list(self):
-        wd = self.app.wd
-        self.return_home()
-        address = []
-        for element_tr in wd.find_elements_by_name("entry"):
-            elements_td = element_tr.find_elements_by_tag_name('td')
-            last_name = elements_td[1].text
-            first_name = elements_td[2].text
-            id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
-            address.append(Address(lastname=last_name, firstname=first_name, id=id))
-        return address
+        if self.address_cach is None:
+            wd = self.app.wd
+            self.return_home()
+            self.address_cach = []
+            for element_tr in wd.find_elements_by_name("entry"):
+                elements_td = element_tr.find_elements_by_tag_name('td')
+                last_name = elements_td[1].text
+                first_name = elements_td[2].text
+                id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
+                self.address_cach.append(Address(lastname=last_name, firstname=first_name, id=id))
+        return list(self.address_cach)
