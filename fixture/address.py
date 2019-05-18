@@ -73,9 +73,12 @@ class AddressHelper:
             wd.find_element_by_name(field_name).send_keys(text)
 
     def delete_first_address(self):
+        self.delete_address_by_index(0)
+
+    def delete_address_by_index(self, index):
         wd = self.app.wd
         self.return_home()
-        self.selsect_first_address()
+        self.selsect_address_by_index(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_element_by_link_text("home").click()
@@ -85,6 +88,10 @@ class AddressHelper:
     def selsect_first_address(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
+
+    def selsect_address_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     """"
     def update_address(self, address):
@@ -177,10 +184,13 @@ class AddressHelper:
         self.return_home()
     """
 
-    def modify_first_address(self, new_address_data):
+    def modify_first_address(self, index):
+        self.modify_first_address(0)
+
+    def modify_address_by_index(self, index, new_address_data):
         wd = self.app.wd
         self.return_home()
-        self.selsect_first_address()
+        self.selsect_address_by_index(index)
         # Open modification form
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # fill address form
@@ -188,7 +198,7 @@ class AddressHelper:
         # submit modification
         wd.find_element_by_xpath("(//input[@name='update'])").click()
         self.return_home()
-        self.address_cach
+        self.address_cach = None
 
     def return_home(self):
         wd = self.app.wd
