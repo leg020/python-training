@@ -192,7 +192,7 @@ class AddressHelper:
         self.return_home()
         self.selsect_address_by_index(index)
         # Open modification form
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         # fill address form
         self.fill_address_form(new_address_data)
         # submit modification
