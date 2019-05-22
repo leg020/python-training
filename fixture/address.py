@@ -189,10 +189,11 @@ class AddressHelper:
 
     def modify_address_by_index(self, index, new_address_data):
         wd = self.app.wd
-        self.return_home()
-        self.selsect_address_by_index(index)
+        #self.return_home()
+        #self.selsect_address_by_index(index)
         # Open modification form
-        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+        self.open_contact_to_edit_by_index(index)
+        #wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         # fill address form
         self.fill_address_form(new_address_data)
         # submit modification
@@ -222,5 +223,30 @@ class AddressHelper:
                 last_name = elements_td[1].text
                 first_name = elements_td[2].text
                 id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
-                self.address_cach.append(Address(lastname=last_name, firstname=first_name, id=id))
+                all_phones = elements_td[5].text.splitlines()
+                self.address_cach.append(Address(lastname=last_name, firstname=first_name,
+                                                 id=id, home=all_phones[0],
+                                                 mobile=all_phones[1], work=all_phones[2],
+                                                 phone2=all_phones[3]))
         return list(self.address_cach)
+
+    def open_contact_to_edit_by_index(self, insex):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name('entry')[insex]
+        cell = row.find_elements_by_tag_name('td')[7]
+        cell.find_element_by_tag_name('a').click()
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_contact_to_edit_by_index(index)
+        firstname = wd.find_element_by_name('firstname').get_attribute('value')
+        lastname = wd.find_element_by_name('lastname').get_attribute('value')
+        id = wd.find_element_by_name('id').get_attribute('value')
+        homephone = wd.find_element_by_name('home').get_attribute('value')
+        workphone = wd.find_element_by_name('work').get_attribute('value')
+        mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
+        secondaryphone = wd.find_element_by_name('phone2').get_attribute('value')
+        return Address(firstname=firstname, lastname=lastname, id=id,
+                       home=homephone, mobile=mobilephone, work=workphone, phone2=secondaryphone)
+
