@@ -223,10 +223,11 @@ class AddressHelper:
                 elements_td = element_tr.find_elements_by_tag_name('td')
                 last_name = elements_td[1].text
                 first_name = elements_td[2].text
+                address_home = elements_td[3].text
                 id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
                 all_phones = elements_td[5].text
                 all_mail = elements_td[4].text
-                self.address_cach.append(Address(lastname=last_name, firstname=first_name,
+                self.address_cach.append(Address(lastname=last_name, firstname=first_name, address_home=address_home,
                                                  id=id, all_phones_from_home_page=all_phones,
                                                  all_mail_from_home_page=all_mail))
         return list(self.address_cach)
@@ -250,7 +251,9 @@ class AddressHelper:
         self.open_contact_to_edit_by_index(index)
         firstname = wd.find_element_by_name('firstname').get_attribute('value')
         lastname = wd.find_element_by_name('lastname').get_attribute('value')
+        address_home = wd.find_element_by_name('address').get_attribute('value')
         id = wd.find_element_by_name('id').get_attribute('value')
+        #phones
         homephone = wd.find_element_by_name('home').get_attribute('value')
         workphone = wd.find_element_by_name('work').get_attribute('value')
         mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
@@ -259,7 +262,7 @@ class AddressHelper:
         email = wd.find_element_by_name('email').get_attribute('value')
         email2 = wd.find_element_by_name('email2').get_attribute('value')
         email3 = wd.find_element_by_name('email3').get_attribute('value')
-        return Address(firstname=firstname, lastname=lastname, id=id,
+        return Address(firstname=firstname, lastname=lastname, id=id, address_home=address_home,
                        home=homephone, mobile=mobilephone, work=workphone, phone2=secondaryphone,
                        email=email, email2=email2, email3=email3)
 
