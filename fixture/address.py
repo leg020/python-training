@@ -224,11 +224,9 @@ class AddressHelper:
                 last_name = elements_td[1].text
                 first_name = elements_td[2].text
                 id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
-                all_phones = elements_td[5].text.splitlines()
+                all_phones = elements_td[5].text
                 self.address_cach.append(Address(lastname=last_name, firstname=first_name,
-                                                 id=id, home=all_phones[0],
-                                                 mobile=all_phones[1], work=all_phones[2],
-                                                 phone2=all_phones[3]))
+                                                 id=id, all_phones_from_home_page=all_phones))
         return list(self.address_cach)
 
     def open_contact_to_edit_by_index(self, insex):
