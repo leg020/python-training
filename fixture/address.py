@@ -225,8 +225,10 @@ class AddressHelper:
                 first_name = elements_td[2].text
                 id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
                 all_phones = elements_td[5].text
+                all_mail = elements_td[4].text
                 self.address_cach.append(Address(lastname=last_name, firstname=first_name,
-                                                 id=id, all_phones_from_home_page=all_phones))
+                                                 id=id, all_phones_from_home_page=all_phones,
+                                                 all_mail_from_home_page=all_mail))
         return list(self.address_cach)
 
     def open_contact_to_edit_by_index(self, insex):
@@ -253,8 +255,13 @@ class AddressHelper:
         workphone = wd.find_element_by_name('work').get_attribute('value')
         mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
         secondaryphone = wd.find_element_by_name('phone2').get_attribute('value')
+        #for mail
+        email = wd.find_element_by_name('email').get_attribute('value')
+        email2 = wd.find_element_by_name('email2').get_attribute('value')
+        email3 = wd.find_element_by_name('email3').get_attribute('value')
         return Address(firstname=firstname, lastname=lastname, id=id,
-                       home=homephone, mobile=mobilephone, work=workphone, phone2=secondaryphone)
+                       home=homephone, mobile=mobilephone, work=workphone, phone2=secondaryphone,
+                       email=email, email2=email2, email3=email3)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
