@@ -43,7 +43,7 @@ class Address:
         self.all_mail_from_home_page = all_mail_from_home_page
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.lastname, self.firstname)
+        return "%s: %s; %s; %s; %s; %s; %s" % (self.id, self.lastname, self.firstname, self.home, self.email, self.aday, self.ayear)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.lastname == other.lastname and self.firstname == other.firstname
