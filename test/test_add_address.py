@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.address import Address
 import pytest
-from data.add_address import constant as testdata
+from data.address import constant as testdata
 
 
 @pytest.mark.parametrize("address", testdata, ids=[repr(x) for x in testdata])
