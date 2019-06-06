@@ -275,3 +275,18 @@ class AddressHelper:
         mobile = re.search("M: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
         return Address(home=home, mobile=mobile, work=work, phone2=phone2)
+
+    def delete_address_by_id(self, id):
+        wd = self.app.wd
+        self.return_home()
+        self.selsect_address_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        wd.find_element_by_css_selector("div.msgbox")
+        wd.find_element_by_link_text("home").click()
+        #self.return_home()
+        self.address_cach = None
+
+    def selsect_address_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
