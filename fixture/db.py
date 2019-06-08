@@ -2,7 +2,6 @@ import pymysql.cursors
 from model.group import Group
 from model.address import Address
 
-
 class DbFixture:
 
     def __init__(self, host, name, user, password):
