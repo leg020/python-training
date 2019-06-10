@@ -287,6 +287,32 @@ class AddressHelper:
         #self.return_home()
         self.address_cach = None
 
+    def modify_address_by_id(self, id, new_address_data):
+        wd = self.app.wd
+        #self.return_home()
+        #self.selsect_address_by_index(index)
+        # Open modification form
+        self.open_contact_to_edit_by_id(id)
+        #wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+        # fill address form
+        self.fill_address_form(new_address_data)
+        # submit modification
+        wd.find_element_by_xpath("(//input[@name='update'])").click()
+        self.return_home()
+        self.address_cach = None
+
+    def open_contact_to_edit_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name('entry')
+        for r in row:
+            try:
+                if r.find_element_by_css_selector("input[value='%s']" % id):
+                    cell = r.find_elements_by_tag_name('td')[7]
+                    cell.find_element_by_tag_name('a').click()
+            except:
+                pass
+
     def selsect_address_by_id(self, id):
         wd = self.app.wd
         wd.find_element_by_css_selector("input[value='%s']" % id).click()

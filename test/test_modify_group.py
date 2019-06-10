@@ -9,11 +9,10 @@ def test_modify_group_name(app, db, check_ui):
     text = "New group56"
     group = random.choice(old_groups)
     index = old_groups.index(group)
-    info = Group(name=text)
-    app.group.modify_group_by_id(group.id, info)
+    group.name = text
+    app.group.modify_group_by_id(group.id, group)
     new_groups = db.get_group_list()
     assert len(old_groups) == len(new_groups)
-    group.name = text
     old_groups[index] = group
     assert old_groups == new_groups
     if check_ui:
