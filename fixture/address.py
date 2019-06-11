@@ -276,6 +276,16 @@ class AddressHelper:
         phone2 = re.search("P: (.*)", text).group(1)
         return Address(home=home, mobile=mobile, work=work, phone2=phone2)
 
+    def get_contact_from_view_page_by_id(self, id):
+        wd = self.app.wd
+        self.open_contact_view_by_id(id)
+        text = wd.find_element_by_id('content').text
+        home = re.search("H: (.*)", text).group(1)
+        work = re.search("W: (.*)", text).group(1)
+        mobile = re.search("M: (.*)", text).group(1)
+        phone2 = re.search("P: (.*)", text).group(1)
+        return Address(home=home, mobile=mobile, work=work, phone2=phone2)
+
     def delete_address_by_id(self, id):
         wd = self.app.wd
         self.return_home()
@@ -309,6 +319,18 @@ class AddressHelper:
             try:
                 if r.find_element_by_css_selector("input[value='%s']" % id):
                     cell = r.find_elements_by_tag_name('td')[7]
+                    cell.find_element_by_tag_name('a').click()
+            except:
+                pass
+
+    def open_contact_view_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name('entry')
+        for r in row:
+            try:
+                if r.find_element_by_css_selector("input[value='%s']" % id):
+                    cell = r.find_elements_by_tag_name('td')[6]
                     cell.find_element_by_tag_name('a').click()
             except:
                 pass
