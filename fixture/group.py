@@ -1,5 +1,5 @@
 __author__ = 'Alex'
-
+from selenium.webdriver.support.ui import Select
 from model.group import Group
 
 class GroupHelper:
@@ -140,3 +140,9 @@ class GroupHelper:
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
         self.group_cach = None
+
+    def select_group_into_address_list(self, id):
+        wd = self.app.wd
+        wd.find_element_by_name('to_group')
+        Select(wd.find_element_by_name("to_group")).select_by_value(id)
+        wd.find_element_by_name("add").click()

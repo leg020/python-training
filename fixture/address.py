@@ -232,6 +232,27 @@ class AddressHelper:
                                                  all_mail_from_home_page=all_mail))
         return list(self.address_cach)
 
+    def check_none_list(self):
+        wd = self.app.wd
+        self.return_home()
+        wd.find_element_by_name("group").click()
+        Select(wd.find_element_by_name("group")).select_by_visible_text("[none]")
+        #wd.find_element_by_name("group").click()
+        self.address_cach = []
+        for element_tr in wd.find_elements_by_name("entry"):
+            elements_td = element_tr.find_elements_by_tag_name('td')
+            last_name = elements_td[1].text
+            first_name = elements_td[2].text
+            address_home = elements_td[3].text
+            id = elements_td[0].find_element_by_name("selected[]").get_attribute("value")
+            all_phones = elements_td[5].text
+            all_mail = elements_td[4].text
+            self.address_cach.append(Address(lastname=last_name, firstname=first_name, address_home=address_home,
+                                                 id=id, all_phones_from_home_page=all_phones,
+                                                 all_mail_from_home_page=all_mail))
+        return list(self.address_cach)
+
+
     def open_contact_to_edit_by_index(self, insex):
         wd = self.app.wd
         self.app.open_home_page()
@@ -337,4 +358,5 @@ class AddressHelper:
 
     def selsect_address_by_id(self, id):
         wd = self.app.wd
+        self.app.open_home_page()
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
