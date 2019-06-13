@@ -232,11 +232,11 @@ class AddressHelper:
                                                  all_mail_from_home_page=all_mail))
         return list(self.address_cach)
 
-    def check_none_list(self):
+    def check_none_list(self, value):
         wd = self.app.wd
         self.return_home()
         wd.find_element_by_name("group").click()
-        Select(wd.find_element_by_name("group")).select_by_visible_text("[none]")
+        Select(wd.find_element_by_name("group")).select_by_value(value)
         #wd.find_element_by_name("group").click()
         self.address_cach = []
         for element_tr in wd.find_elements_by_name("entry"):
@@ -360,3 +360,8 @@ class AddressHelper:
         wd = self.app.wd
         self.app.open_home_page()
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+    def select_remove(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+        wd.find_element_by_name("remove").click()
