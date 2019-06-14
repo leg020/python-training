@@ -4,6 +4,8 @@ from model.group import Group
 import random
 
 def test_add_address_in_group(app, db):
+    if len(db.get_group_list()) == 0:
+        app.group.create(Group(name='test'))
     if len(app.address.check_none_list(value="[none]")) == 0:
         app.group.create(Group(name='test'))
         app.address.create(Address(firstname='test'))
