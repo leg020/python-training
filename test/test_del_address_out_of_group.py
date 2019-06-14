@@ -18,6 +18,10 @@ def test_del_address_out_of_group(app, db):
     app.address.check_none_list(position.group_id)
     app.address.select_remove(position.id)
     new_list = db.get_address_group_list()
+    new_list_address_in_group = app.address.check_none_list(position.group_id)
+    for row in new_list_address_in_group:
+        assert row.id is not position.id
     assert len(list) - 1 == len(new_list)
     list.remove(position)
     assert list == new_list
+

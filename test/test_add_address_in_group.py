@@ -12,10 +12,16 @@ def test_add_address_in_group(app, db):
     old_list = db.get_address_group_list()
     address = random.choice(app.address.check_none_list(value="[none]"))
     group = random.choice(app.group.get_group_list())
+    old_address_list_in_group = app.address.check_none_list(value=group.id)
+    for row in old_address_list_in_group:
+        assert row.id is not address.id
     app.address.selsect_address_by_id(address.id)
     app.group.select_group_into_address_list(group.id)
     position = Address(id=address.id, group_id=group.id)
     new_list = db.get_address_group_list()
+    new_address_list_in_group = app.address.check_none_list(value=group.id)
+    old_address_list_in_group.append(address)
+    assert old_address_list_in_group == new_address_list_in_group
     assert len(old_list) + 1 == len(new_list)
     old_list.append(position)
     assert sorted(old_list, key=Group.id_or_max) == sorted(new_list, key=Group.id_or_max)
