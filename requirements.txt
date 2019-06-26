@@ -4,5 +4,4 @@ selenium
 jsonpickle
 pony
 pymysql
-pymysql-connector-python-rf
-
+mysql-connector-python-rf
