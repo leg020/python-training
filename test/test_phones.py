@@ -1,6 +1,7 @@
 __author__ = 'Alex'
 import re
 from model.address import Address
+import allure
 
 def test_phones_on_home_page(app, db):
     contact_list = sorted(app.address.get_address_list(), key=Address.id_or_max)

@@ -1,6 +1,7 @@
 __author__ = 'Alex'
 from model.address import Address
 import random
+import allure
 
 def test_modify_address_firstname(app, db, check_ui):
     if app.address.count() == 0:

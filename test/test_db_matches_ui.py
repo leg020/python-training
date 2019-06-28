@@ -1,5 +1,6 @@
 __author__ = "Alex"
 from model.group import Group
+import allure
 from timeit import timeit
 
 def test_group_list(app, db):

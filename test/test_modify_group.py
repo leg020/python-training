@@ -1,6 +1,7 @@
 __author__ = 'Alex'
 from model.group import Group
 import random
+import allure
 
 def test_modify_group_name(app, db, check_ui):
     if app.group.count() == 0:
